@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import { registerIntercepts, setAuthHeaders } from "apis/axios";
 import { initializeLogger } from "common/logger";
 
+import ShowTask from "components/Tasks/ShowTask";
 import CreateTask from "components/Tasks/CreateTask";
 import Dashboard from "./components/Dashboard";
 import NavBar from "./components/NavBar";
@@ -22,7 +23,7 @@ const App = () => {
       <ToastContainer />
       <Switch>
         <Route exact path="/" component={NavBar} />
-        <Route exact path="/about" render={() => <div>About</div>} />
+        <Route exact path="/tasks/:slug/show" component={ShowTask} />
         <Route exact path="/tasks/create" component={CreateTask} />
         <Route exact path="/dashboard" component={Dashboard} />
       </Switch>
