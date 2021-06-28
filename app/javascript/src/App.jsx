@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
-import { setAuthHeaders } from "apis/axios";
+import { ToastContainer } from "react-toastify";
+import { registerIntercepts, setAuthHeaders } from "apis/axios";
 import { initializeLogger } from "common/logger";
 
 import CreateTask from "components/Tasks/CreateTask";
@@ -12,11 +13,13 @@ const App = () => {
 
   useEffect(() => {
     initializeLogger();
+    registerIntercepts();
     setAuthHeaders(setLoading);
   }, []);
 
   return (
     <Router>
+      <ToastContainer />
       <Switch>
         <Route exact path="/" component={NavBar} />
         <Route exact path="/about" render={() => <div>About</div>} />
