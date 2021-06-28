@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tasks, only: [:index], param: :slug
   resources :tasks, only: :index
 
   root "home#index"
