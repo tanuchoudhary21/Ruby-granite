@@ -2,6 +2,7 @@ class Task < ApplicationRecord
     # belongs_to :user
   
     validates :title, presence: true, length: { maximum: 50 }
+    belongs_to :user
     validates :slug, uniqueness: true
     before_create :set_slug
     # after_create :log_task_details
