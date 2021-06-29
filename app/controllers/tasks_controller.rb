@@ -19,11 +19,10 @@ class TasksController < ApplicationController
       end
 
       def show
-        task_creator = User.find(@task.creator_id).name
-        render status: :ok, json: { task: @task,
-                                    assigned_user: @task.user,
-                                    task_creator: task_creator }
+        task_creator = User.find(@task.user_id).name
+        render status: :ok, json: { task: @task, assigned_user: @task.user, task_creator: task_creator }
       end
+
     
       def update
       if @task.update(task_params)

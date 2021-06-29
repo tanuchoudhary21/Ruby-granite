@@ -2,10 +2,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(name: 'Sam Smith',
-                     email: 'sam@example.com',
-                     password: 'welcome',
-                     password_confirmation: 'welcome')
+    @user = User.new(name: 'Tanu Choudhary')
   end
 
   # embed new test cases here...
@@ -19,5 +16,4 @@ class UserTest < ActiveSupport::TestCase
     @user.name = 'a' * 50
     assert @user.invalid?
   end
-  
 end

@@ -45,6 +45,7 @@ const EditTask = ({ history }) => {
   const fetchTaskDetails = async () => {
     try {
       const response = await tasksApi.show(slug);
+      logger.info(response.data);
       setTitle(response.data.task.title);
       setAssignedUser(response.data.assigned_user);
       setUserId(response.data.assigned_user.id);
