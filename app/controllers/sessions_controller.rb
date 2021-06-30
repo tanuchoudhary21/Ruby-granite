@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_action :authenticate_user_using_x_auth_token, only: [:destroy]
 
   def create
     user = User.find_by(email: login_params[:email].downcase)
@@ -10,10 +11,14 @@ class SessionsController < ApplicationController
       render status: :unauthorized, json: { notice: t('session.incorrect_credentials') }
     end
   end
- 
-   private
- 
-     def login_params
-       params.require(:login).permit(:email, :password)
-     end
- end
+
+  def destroy
+    @current_user = nil
+  end
+
+  private
+
+    def login_params
+      params.require(:login).permit(:email, :password)
+    end
+end
