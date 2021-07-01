@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { all, isNil, isEmpty, either } from "ramda";
-
-import Container from "components/Container";
-import Table from "components/Tasks/Table";
-import PageLoader from "components/PageLoader";
+import { setAuthHeaders } from "apis/axios";
 import tasksApi from "apis/tasks";
-import DeleteAlert from "components/Tasks/DeleteAlert";
+import Container from "components/Container";
+import PageLoader from "components/PageLoader";
+import Table from "components/Tasks/Table/index";
 
 const Dashboard = ({ history }) => {
+  const [tasks, setTasks] = useState([]);
   const [pendingTasks, setPendingTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
-  const [slug, setSlug] = useState("");
 
   const fetchTasks = async () => {
     try {
+      setAuthHeaders();
       const response = await tasksApi.list();
       const { pending, completed } = response.data.tasks;
       setPendingTasks(pending);
@@ -36,15 +35,6 @@ const Dashboard = ({ history }) => {
     }
   };
 
-  const deleteTask = slug => {
-    setShowDeleteAlert(true);
-    setSlug(slug);
-  };
-
-  const showTask = slug => {
-    history.push(`/tasks/${slug}/show`);
-  };
-
   const handleProgressToggle = async ({ slug, progress }) => {
     try {
       await tasksApi.update({ slug, payload: { task: { progress } } });
@@ -56,17 +46,8 @@ const Dashboard = ({ history }) => {
     }
   };
 
-  const starTask = async (slug, status) => {
-    try {
-      const toggledStatus = status === "starred" ? "unstarred" : "starred";
-      await tasksApi.update({
-        slug,
-        payload: { task: { status: toggledStatus } },
-      });
-      await fetchTasks();
-    } catch (error) {
-      logger.error(error);
-    }
+  const showTask = slug => {
+    history.push(`/tasks/${slug}/show`);
   };
 
   useEffect(() => {
@@ -96,23 +77,17 @@ const Dashboard = ({ history }) => {
       {!either(isNil, isEmpty)(pendingTasks) && (
         <Table
           data={pendingTasks}
+          destroyTask={destroyTask}
           showTask={showTask}
           handleProgressToggle={handleProgressToggle}
-          starTask={starTask}
         />
       )}
       {!either(isNil, isEmpty)(completedTasks) && (
         <Table
           type="completed"
           data={completedTasks}
-          deleteTask={deleteTask}
+          destroyTask={destroyTask}
           handleProgressToggle={handleProgressToggle}
-        />
-      )}
-      {showDeleteAlert && (
-        <DeleteAlert
-          onClose={() => setShowDeleteAlert(false)}
-          destroyTask={() => destroyTask(slug)}
         />
       )}
     </Container>

@@ -11,6 +11,7 @@ const TableRow = ({
 }) => {
   const isCompleted = type === "completed";
   const toggledProgress = isCompleted ? "pending" : "completed";
+  logger.info(data);
 
   return (
     <tbody className="bg-white divide-y divide-bb-gray-600">
@@ -47,7 +48,7 @@ const TableRow = ({
               className="px-6 py-4 text-sm font-medium leading-5
              text-bb-gray-600 whitespace-no-wrap"
             >
-              {rowData.assigned_user.name}
+              {rowData.user_id}
             </td>
           )}
           {isCompleted && (
