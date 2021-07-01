@@ -4,6 +4,7 @@ class Task < ApplicationRecord
     validates :title, presence: true, length: { maximum: 50 }
     belongs_to :user
     has_many :comments, dependent: :destroy
+    enum progress: { pending: 0, completed: 1 }
     validates :slug, uniqueness: true
     before_create :set_slug
     validate :slug_not_changed
