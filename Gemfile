@@ -19,7 +19,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'react-rails'
 gem 'bcrypt', '~> 3.1.13'
 gem "pundit"
-gem 'wdm', '>= 0.1.0'
+# gem 'wdm', '>= 0.1.0'
 gem 'rexml', '~> 3.2', '>= 3.2.5'
 
 group :development, :test do
