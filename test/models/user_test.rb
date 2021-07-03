@@ -16,7 +16,7 @@ class UserTest < ActiveSupport::TestCase
 
   def test_name_should_not_exceed_maximum_length
     @user.name = 'a' * 31
-    assert user.valid?
+    assert @user.valid?
   end
 
   def test_user_should_be_not_be_valid_and_saved_without_email
