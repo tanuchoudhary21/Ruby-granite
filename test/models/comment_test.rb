@@ -26,6 +26,7 @@ class CommentTest < ActiveSupport::TestCase
       @comment.save
     end
   end 
+  
   def test_comment_should_not_be_valid_without_user
   @comment.user = nil
   assert @comment.invalid?
