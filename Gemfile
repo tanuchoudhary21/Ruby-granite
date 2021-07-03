@@ -21,6 +21,8 @@ gem 'bcrypt', '~> 3.1.13'
 gem "pundit"
 # gem 'wdm', '>= 0.1.0'
 gem 'rexml', '~> 3.2', '>= 3.2.5'
+gem 'bundler-audit',require: false
+gem 'ruby_audit', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
