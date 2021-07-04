@@ -14,7 +14,7 @@ const Dashboard = ({ history }) => {
   const fetchTasks = async () => {
     try {
       const response = await tasksApi.list();
-      setPendingTasks(response.data.tasks.pending);
+      setPendingTasks(response.data.tasks.pending); // Now this thing is giving error i don't know what is happening
       setCompletedTasks(response.data.tasks.completed);
     } catch (error) {
       logger.error(error);

@@ -35,7 +35,7 @@ const MyPreferences = () => {
       const { data } = await preferencesApi.show(userId);
       logger.info("Data", data);
       // logger.info("Notification Delivery Hour", data.preference.notification_delivery_hour)
-      setNotificationDeliveryHour(data.preference.notification_delivery_hour);
+      setNotificationDeliveryHour(data.preference.notification_delivery_hour); // this line is giving error as data is null so we cannot access its data
       setReceiveEmail(data.preference.receive_email);
       setPreferenceId(data.preference.id);
     } catch (error) {
