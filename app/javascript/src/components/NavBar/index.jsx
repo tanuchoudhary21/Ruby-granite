@@ -36,6 +36,7 @@ const NavBar = () => {
                 iconClass="ri-add-fill"
                 path="/tasks/create"
               />
+              <NavItem name="Preferences" path="/my/preferences" />
             </div>
           </div>
 
