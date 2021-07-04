@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       render status: :ok, json: { notice: t('successfully_created', entity: 'User') }
     else
       render status: :unprocessable_entity, json: {
-        notice: @user.errors.full_messages.to_sentence
+        errors: @user.errors.full_messages.to_sentence
       }
     end
   end
