@@ -24,6 +24,10 @@ gem 'rexml', '~> 3.2', '>= 3.2.5'
 gem 'bundler-audit',require: false
 gem 'ruby_audit', require: false
 gem "sidekiq"
+# For periodic sidekiq jobs
+gem "sidekiq-cron"
+# For opening mails in development env
+gem "letter_opener", :group => :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
