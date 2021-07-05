@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
   def setup
@@ -36,22 +36,22 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     response_json = response.parsed_body
     assert_equal response_json['errors'], "Title can't be blank"
   end
-  
+
   def test_should_update_task
     new_title = 'Learn React'
     slug_url = "/tasks/#{@task.slug}"
     task_params = { task: { title: new_title, user_id: 1, authorize_owner: true } }
-  
+
     put slug_url, params: task_params, headers: @headers
     assert_response :success
     @task.reload
     assert_equal @task.title, new_title
   end
-  
+
   def test_should_destroy_task
     initial_task_count = @user.tasks.size
     slug_url = "/tasks/#{@task.slug}"
-  
+
     delete slug_url, headers: @headers
     assert_response :success
     assert_equal @user.tasks.size, initial_task_count - 1
