@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 class CommentsControllerTest < ActionDispatch::IntegrationTest
   def setup
@@ -10,14 +10,13 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     @headers = headers(@user)
   end
 
-  def test_should_create_comment_for_valid_request
-    content = 'Wow!'
-    post comments_url, params: { comment: { content: content, task_id: @task.id } }, headers: @headers
+  def test_create_a_valid_comment
+    post comments_url, params: { comment: { content: 'Wow!', task_id: @task.id } }, headers: @headers
     assert_response :success
-    assert_equal @task.comments.last.content, content
+    assert_equal @task.comments.last.content, 'Wow!'
   end
 
-  def test_shouldnt_create_comment_without_content
+  def test_create_comment_with_blank_title
     post comments_url, params: { comment: { content: '', task_id: @task.id } }, headers: @headers
     assert_response :unprocessable_entity
     response_json = response.parsed_body

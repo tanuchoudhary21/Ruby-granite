@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.create!(name: 'Sam Smith',
+    @user = User.create(name: 'Sam Smith',
                         email: 'sam@example.com',
                         password: 'welcome',
                         password_confirmation: 'welcome')
@@ -95,5 +95,5 @@ class UserTest < ActiveSupport::TestCase
     @user.save
     assert_equal @user.preference.notification_delivery_hour, Constants::DEFAULT_NOTIFICATION_DELIVERY_HOUR
   end
-  
+
 end

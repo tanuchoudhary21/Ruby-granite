@@ -1,12 +1,12 @@
-require "test_helper"
+require 'test_helper'
 require "sidekiq/testing"
 
 class TaskLoggerJobTest < ActiveJob::TestCase
   def setup
     @user = User.create!(name: 'Sam Smith',
-                          email: 'sam@example.com',
-                          password: 'welcome',
-                          password_confirmation: 'welcome')
+                      email: 'sam@example.com',
+                      password: 'welcome',
+                      password_confirmation: 'welcome')
     @task = Task.create!(title: 'test', user: @user)
   end
 
